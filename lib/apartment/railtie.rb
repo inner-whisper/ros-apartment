@@ -38,7 +38,7 @@ module Apartment
         Apartment.connection_class.connection_pool.with_connection do
           Apartment::Tenant.init
         end
-      rescue ::ActiveRecord::NoDatabaseError
+      rescue ::ActiveRecord::NoDatabaseError, ::PG::ConnectionBad
         # Since `db:create` and other tasks invoke this block from Rails 5.2.0,
         # we need to swallow the error to execute `db:create` properly.
       end
